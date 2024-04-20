@@ -11,22 +11,33 @@ function filterRequest($requestname)
     return  htmlspecialchars(strip_tags($_POST[$requestname]));
 }
 
-function getAllData($table, $where = null, $values = null)
+function getAllData($table, $where = null, $values = null, $json = true)
 {
     global $con;
     $data = array();
-    $stmt = $con->prepare("SELECT  * FROM $table WHERE   $where ");
+    if ($where == null) {
+        $stmt = $con->prepare("SELECT  * FROM $table   ");
+    } else {
+        $stmt = $con->prepare("SELECT  * FROM $table WHERE   $where ");
+    }
     $stmt->execute($values);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $count  = $stmt->rowCount();
-    if ($count > 0) {
-        echo json_encode(array("status" => "success", "data" => $data));
+    if ($json == true) {
+        if ($count > 0) {
+            echo json_encode(array("status" => "success", "data" => $data));
+        } else {
+            echo json_encode(array("status" => "failure"));
+        }
+        return $count;
     } else {
-        echo json_encode(array("status" => "failure"));
+        if ($count > 0) {
+            return $data;
+        } else {
+            return json_encode(array("status" => "failure"));
+        }
     }
-    return $count;
 }
-
 
 function getData($table, $where = null, $values = null)
 {
@@ -43,7 +54,8 @@ function getData($table, $where = null, $values = null)
     }
     return $count;
 }
- 
+
+
 
 
 function insertData($table, $data, $json = true)
@@ -164,14 +176,26 @@ function checkAuthenticate()
 }
 
 
-function   printFailure($message = "none") 
+function   printFailure($message = "none")
 {
-    echo     json_encode(array("status" => "failure" , "message" => $message));
+    echo     json_encode(array("status" => "failure", "message" => $message));
+}
+function   printSuccess($message = "none")
+{
+    echo     json_encode(array("status" => "success", "message" => $message));
 }
 
-/*function sendEmail($to , $title , $body){
+function result($count)
+{
+    if ($count > 0) {
+        printSuccess();
+    } else {
+        printFailure();
+    }
+}
+
+function sendEmail($to , $title , $body){
 $header = "From: support@hassnaa.com " . "\n" . "CC: hassnaayahaa777 @gmail.com" ; 
 mail($to , $title , $body , $header) ; 
 echo "Success" ; 
 }
-*/
