@@ -4,12 +4,12 @@ include "../connect.php" ;
 
 
 $usersid = filterRequest("usersid") ; 
-$productsid = filterRequest("productsid") ; 
+$itemsid = filterRequest("itemsid") ; 
 
 
 $data = array(
     "favorite_usersid"  =>   $usersid , 
-    "favorite_productsid"  =>   $productsid
+    "favorite_itemsid"  =>   $itemsid
 );
 
 

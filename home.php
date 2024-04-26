@@ -11,9 +11,9 @@ $categories = getAllData("categories" , null , null , false )  ;
 
 $alldata['categories'] = $categories ; 
 
-$products = getAllData("products1view" , "products_discount != 0" , null , false )  ;
+$items = getAllData("items1view" , "items_discount != 0" , null , false )  ;
 
-$alldata['products'] = $products ; 
+$alldata['items'] = $items ; 
 
  
 echo json_encode($alldata) ;

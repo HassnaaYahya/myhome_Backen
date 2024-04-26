@@ -3,6 +3,6 @@
 include "../connect.php" ; 
 
 $usersid = filterRequest("usersid") ; 
-$productsid = filterRequest("productsid") ; 
+$itemsid = filterRequest("itemsid") ; 
 
-deleteData("favorite" , "favorite_usersid = $usersid AND favorite_productsid = $productsid") ; 
+deleteData("favorite" , "favorite_usersid = $usersid AND favorite_itemsid = $itemsid") ; 
