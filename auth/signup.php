@@ -3,7 +3,7 @@
 include "../connect.php";
 
 $username = filterRequest("username");
-$password = sha1($_POST["password"]);
+$password = sha1($_POST['password']);
 $email = filterRequest("email");
 $phone = filterRequest("phone");
 $verfiycode     = rand(10000 , 99999);
@@ -22,8 +22,10 @@ if ($count > 0) {
         "users_phone" => $phone,
         "users_verfiycode" => $verfiycode ,
     );
-    
-    //sendEmail($email , "Verfiy Code Ecommerce" , "Verfiy Code $verfiycode") ; 
+    sendEmail($email , "Verfiy Code Ecommerce" , "Verfiy Code $verfiycode") ; 
     insertData("users" , $data) ; 
 
 }
+
+      //32 في مشكلة لوما يتم الاستضافة  بفيديو 
+      //sendEmail($email , "Verfiy Code Ecommerce" , "Verfiy Code $verfiycode") ; 

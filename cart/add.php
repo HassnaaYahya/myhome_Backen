@@ -18,7 +18,3 @@ $data = array(
 
 insertData("cart", $data);
  
-
-    // Mysql 
-
-    // PHP 
